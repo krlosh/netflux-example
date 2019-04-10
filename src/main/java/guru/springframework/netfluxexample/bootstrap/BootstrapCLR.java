@@ -24,7 +24,7 @@ public class BootstrapCLR implements CommandLineRunner {
         this.movieRepository.deleteAll().thenMany(
                 Flux.just("Silence of Lambdas" ,"AEon flux", "Enter de Mono<Void>", "The Fluxxinator",
                         "Back to the Future", "Meet the Fluxes", "Lord of the Fluxes")
-                    .map(title->new Movie(UUID.randomUUID().toString(),title)))
+                    .map(title->new Movie(title)))
                     .flatMap(movieRepository::save)
                     .subscribe(null, null, ()->{
                         movieRepository.findAll().subscribe(System.out::println);
